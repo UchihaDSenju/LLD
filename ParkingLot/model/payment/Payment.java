@@ -1,3 +1,7 @@
 package model.payment;
 
-class Payment{}
+import java.time.LocalDateTime;
+
+abstract class Payment{
+    abstract int calculatePayment(LocalDateTime dt);
+}

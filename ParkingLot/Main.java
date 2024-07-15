@@ -1,7 +1,15 @@
 import controller.*;
+import model.vehicle.*;;
 class Main{
 	public static void main(String[] args){
-		ParkingLotService service = ParkingLotService.getParkingLotInstance();
-		System.out.println("Hello");
+		ParkingController controller = ParkingController.getParkingControllerInstance();
+
+		controller.generateLots(25);
+
+		controller.parkVehicle(new Car("TN 12322"));
+		controller.parkVehicle(new Car("TN 32155"));
+		controller.parkVehicle(new Bike("TN 39001"));
+
+		
 	}
 }

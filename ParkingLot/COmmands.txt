@@ -1,5 +1,5 @@
 To compile
-javac -cp . -d target // Stores the .class in target
+javac Main.java -cp . -d target // Stores the .class in target
 To run
 java -cp target Main
 java -cp ./target Main
