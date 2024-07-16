@@ -1,6 +1,7 @@
 package model.vehicle;
 import model.Ticket;
 abstract public class Vehicle{
+    
     public String vehicleNumber;
     private Ticket ticket;
 

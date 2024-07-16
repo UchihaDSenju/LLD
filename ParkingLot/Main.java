@@ -9,7 +9,9 @@ class Main{
 		controller.parkVehicle(new Car("TN 12322"));
 		controller.parkVehicle(new Car("TN 32155"));
 		controller.parkVehicle(new Bike("TN 39001"));
-
+		
+		controller.exitVehicle("3332");
+		controller.exitVehicle("TN 39001");
 		
 	}
 }

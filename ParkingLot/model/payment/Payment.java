@@ -1,7 +1,7 @@
 package model.payment;
-
+import model.*;
 import java.time.LocalDateTime;
 
 abstract class Payment{
-    abstract int calculatePayment(LocalDateTime dt);
+    abstract int calculatePayment(Ticket t);
 }
