@@ -4,7 +4,7 @@ public class Player{
 	private String marker;
 	public Player(String name, String marker){
 		this.name = name;
-		this.marker = " " + marker.toUpperCase() + " ";
+		this.marker = marker.toUpperCase();
 	}
 	
 	public Player(){}

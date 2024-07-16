@@ -4,7 +4,7 @@ public class Cell{
 	private String marker;
 	
 	public Cell(){
-		this.marker = " . ";
+		this.marker = ".";
 	}
 
 	public void setMarker(String marker){
@@ -17,7 +17,7 @@ public class Cell{
 
 	@Override
 	public String toString() {
-		return marker;
+		return " "+marker+" ";
 	}
 
 	

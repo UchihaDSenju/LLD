@@ -1,4 +1,5 @@
 import controller.*;
+import exceptions.CellNotEmptyException;
 import exceptions.CellNotFoundException;
 import model.*;
 import java.util.*;
@@ -6,6 +7,7 @@ class Main{
 	public static void main(String[] args){
 		BoardController controller = BoardController.getControllerInstance();
 		controller.generateBoard(3);
+		controller.viewBoard();
 		Queue<Player> q = new LinkedList<>();
 		
 		q.offer(new Player("A", "X"));
@@ -19,11 +21,27 @@ class Main{
 					System.out.println("Enter Where to place " + p.getMarker());
 					int x = sc.nextInt();
 					int y = sc.nextInt();
+					x = x-1;
+					y = y-1;
 					controller.placeMarker(p, x, y);
+					if(controller.isWinner(p, x, y)){
+						controller.viewBoard();
+						System.out.println("Player " +p.getName() + " Wins");
+						return;
+					}
+					if(controller.getEmptyCells() == 0){
+						controller.viewBoard();
+						System.out.println("All Cells Filled");
+						return;
+					}
 					controller.viewBoard();
 					break;
 				}
 				catch(CellNotFoundException e){
+					System.out.println(e);
+					continue;
+				}
+				catch(RuntimeException e){
 					System.out.println(e);
 					continue;
 				}

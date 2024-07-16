@@ -26,18 +26,21 @@ public class BoardController{
 			}
 			newBoard.add(row);
 		}
-		
 		board.setBoard(newBoard);
+		board.setCellCount(n*n);
+	}
+	
+	public int getEmptyCells(){
+		return board.getCellCount();
 	}
 	
 	public void placeMarker(Player p, int i, int j){
-		try {
-			if(board.getBoard().get(i).get(j).getMarker().equals(" . ")){
-				board.getBoard().get(i).get(j).setMarker(p.getMarker());
-			}
-		} catch (Exception e) {
-			throw new CellNotFoundException();
+		if(board.getBoard().get(i).get(j).getMarker().equals(".")){
+			board.getBoard().get(i).get(j).setMarker(p.getMarker());
+			board.setCellCount(board.getCellCount() - 1);
+			return;
 		}
+		throw new CellNotEmptyException();
 	}
 
 	public boolean isWinner(Player p, int i, int j){
@@ -46,7 +49,19 @@ public class BoardController{
 		int left = recur(board.getBoard(),i, j-1, 0, -1, p.getMarker());
 		if(right + left + 1 == 3)return true;
 		//vertical
+		int top = recur(board.getBoard(), i+1, j, 1, 0, p.getMarker());
+		int down = recur(board.getBoard(), i-1, j, -1, 0, p.getMarker());
+		if(top + down + 1 == 3)return true;
 		//digonal
+		if(i == j){
+			int downRight = recur(board.getBoard(), i+1, j+1, 1, 1, p.getMarker());
+			int topLeft = recur(board.getBoard(), i-1, j-1, -1, -1, p.getMarker());
+			if(downRight + topLeft + 1 == 3)return true;
+
+			int upRight = recur(board.getBoard(), i-1, j+1, -1, 1, p.getMarker());
+			int downLeft = recur(board.getBoard(), i+1, j-1, 1, -1, p.getMarker());
+			if(upRight + downLeft + 1 == 3)return true;
+		}
 		return false;
 	}
 
@@ -62,6 +77,8 @@ public class BoardController{
 		if(i<0 || j<0 || i>=board.size() || j>=board.get(i).size()){
 			return 0;
 		}
+
+		if(!board.get(i).get(j).getMarker().equals(marker)) return 0;
 
 		int a = 1+recur(board, i+ti, j+tj, ti, tj, marker);
 
