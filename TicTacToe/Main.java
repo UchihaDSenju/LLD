@@ -41,9 +41,13 @@ class Main{
 					System.out.println(e);
 					continue;
 				}
-				catch(RuntimeException e){
-					System.out.println(e);
+				catch(IndexOutOfBoundsException e){
+					System.out.println("Cell Not Found... Enter Proper Cell");
 					continue;
+					//break;
+				}
+				catch(RuntimeException e){
+					return;
 				}
 			}
 			q.offer(p);
